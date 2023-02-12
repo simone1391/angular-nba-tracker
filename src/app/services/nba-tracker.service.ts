@@ -13,7 +13,7 @@ export class NbaTrackerService {
 
   private url = 'https://free-nba.p.rapidapi.com';
   private _games: GetGamesModel[] = [];
-  private _selectedTeam: Team | undefined;
+  private _selectedTeam: number | undefined;
   constructor(private httpClient: HttpClient,private datePipe: DatePipe) {
   }
 
@@ -48,11 +48,11 @@ export class NbaTrackerService {
     }
     return urlDates;
   }
-  get selectedTeam(): Team | undefined {
+  get selectedTeam(): number | undefined {
     return this._selectedTeam;
   }
 
-  set selectedTeam(value: Team | undefined) {
+  set selectedTeam(value: number | undefined) {
     this._selectedTeam = value;
   }
   get games(): GetGamesModel[] {

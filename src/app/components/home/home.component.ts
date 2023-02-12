@@ -27,7 +27,7 @@ import {GetTeamsModel} from "../../model/getTeams.model";
 })
 export class HomeComponent implements OnInit{
   teams: Team[] | undefined;
-  selectedTeam: Team | undefined;
+  selectedTeam: number | undefined;
 
   games: GetGamesModel[] = [];
 
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit{
     this.nbaTrackerService.getTeams().subscribe((res: GetTeamsModel) => {
       this.teams=res.data;
       this.selectedTeam = this.nbaTrackerService.selectedTeam;
-      this.idTeam = this.nbaTrackerService.selectedTeam?.id
+      this.idTeam = this.nbaTrackerService.selectedTeam
     })
   }
 
@@ -47,8 +47,8 @@ export class HomeComponent implements OnInit{
 
   trackTeam(): void {
     this.nbaTrackerService.selectedTeam=this.selectedTeam;
-    this.idTeam = this.selectedTeam?.id!;
-    this.nbaTrackerService.getGames(this.idTeam).subscribe((res: GetGamesModel) => {
+    this.idTeam = this.selectedTeam;
+    this.nbaTrackerService.getGames(this.idTeam!).subscribe((res: GetGamesModel) => {
       res.idTeam = this.idTeam;
       this.nbaTrackerService.games.push(res);
     })
